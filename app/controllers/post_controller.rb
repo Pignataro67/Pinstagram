@@ -40,5 +40,15 @@ class PostController < ApplicationController
       flash[:error] = "Please stop!!"
       redirect '/login'
     end
+  end
+  
+  get '/posts/:id' do
+    if is_logged_in?
+      @post = Post.find_by_id(params[:id])
+      erb :'/posts/id'
+    else
+      flash[:error] = "Please log in"
+      redirect '/login'
+    end
   end 
 end
