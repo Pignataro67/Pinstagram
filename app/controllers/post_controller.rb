@@ -18,4 +18,27 @@ class PostController < ApplicationController
       redirect '/login'
     end
   end
+  
+  post '/posts' do
+    if is_logged_in?
+      if params[:file] && params[:caption] != ""
+        @post = Post.create(caption: params[:caption], user_id: current_user.id)
+        @filename = params[:file][:filename]
+        file = params[:file][:tempfile]
+        File.open("./public/images/post/#{@filename}", 'wb') do |f|
+          f.write(file.read)
+        end
+        @post.post_photo = @filename
+        @post.save
+        flash[:success] = "Post successfully made!"
+        redirect '/posts'
+      else
+        flash[:error] = "Please make sure both fields are present."
+        redirect '/posts/new'
+      end
+    else
+      flash[:error] = "Please stop!!"
+      redirect '/login'
+    end
+  end 
 end
