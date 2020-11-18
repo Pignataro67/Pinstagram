@@ -50,5 +50,17 @@ class PostController < ApplicationController
       flash[:error] = "Please log in"
       redirect '/login'
     end
-  end 
+  end
+  
+  delete '/posts/:id/delete' do
+    post = Post.find_by_id(params[:id])
+    if is_logged_in? && post.user_id == current_user.id
+      post.delete
+      flash[:success] = "Post removed"
+      redirect '/posts'
+    else
+      flash[:error] = "Please log in"
+      redirect '/login'
+    end
+  end
 end
