@@ -2,4 +2,7 @@
 
 require_relative 'config/environment'
 
-run Rails.application
+run ApplicationController
+use Rack::MethodOverride
+use PostController
+use UserController
