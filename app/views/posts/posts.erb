@@ -9,7 +9,9 @@
     <br><br>
 
     <% @posts.each do |post| %>
-      <a href="/users/<%= @post.user.slug %>"><%= @post.user.name%></a>
+      <a href="/posts/<%= post.id %>"><%= post.post_photo %></a>
+      <br>
+      <a href="/posts/<%= post.id %>"><%= post.caption %></a>
     <% end %>
   </body>
 </html>
