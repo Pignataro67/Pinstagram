@@ -6,25 +6,23 @@ class UserController < ApplicationController
     erb :'/users/users'
   end
 
-    get '/signup' do
+    get '/login' do
       # "Sign up"
       if !is_logged_in?(session)
-        erb :'/users/new'
+        erb :'/users/login'
       else
         redirect '/posts'
       end
     end
   
-    post '/signup' do
-      @user = User.new(params[:user])
-      @user.user_photo = ""
-      session[:user_id] = @user.id
-      @user.save
-      if @user.save
+    post '/login' do
+      user = User.find_by(username: params[:username])
+      
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
         redirect '/posts'
       else
-        flash[:error] = "Error"
-        redirect '/signup'
+        flash[:error] = "Your login information seems to be incorrect."
+        redirect '/login'
       end
-    end
   end
