@@ -5,24 +5,37 @@ class UserController < ApplicationController
     erb :'/users/users'
   end
 
-    get '/login' do
-      if !is_logged_in?(session)
-        erb :'/users/login'
-      else
-        redirect '/posts'
-      end
+  post '/users/:id/edit' do
+    @user = User.find_by_id(params[:id])
+    if is_logged_in?(session) && @user.id == current_user.id
+      erb :'/users/edit'
+    elsif is_logged_in?(session) && @user.id != current_user.id
+    flash[:error] = "This is not your profile to edit"
+    redirect '/posts'
+    else
+      flash[:error] = "Please log in"
+      redirect '/login'
     end
+  end
+    
+  get '/login' do
+    if !is_logged_in?(session)
+      erb :'/users/login'
+    else
+      redirect '/posts'
+    end
+  end
   
-    post '/login' do
-      user = User.find_by(username: params[:username])
+  post '/login' do
+    user = User.find_by(username: params[:username])
       
-      if user && user.authenticate(params[:password])
-        session[:user_id] = user.id
-        redirect '/posts'
-      else
-        flash[:error] = "Your login information seems to be incorrect."
-        redirect '/login'
-      end
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect '/posts'
+    else
+      flash[:error] = "Your login information seems to be incorrect."
+      redirect '/login'
+    end
   end
 
   get '/signup' do
