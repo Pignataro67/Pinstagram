@@ -43,4 +43,10 @@ class UserController < ApplicationController
       flash[:error] = "Unsuccessfully created."
       redirect '/signup'
     end
+  
+    get '/logout' do
+      session.clear
+      flash[:success] = "See you next time!"
+      redirect '/login'
+    end
   end
