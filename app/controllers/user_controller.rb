@@ -43,27 +43,5 @@ class UserController < ApplicationController
       session.clear
       flash[:success] = "See you next time!"
       redirect '/login'
-    end
-
-    get '/users/:id' do
-      @user = User.find_by_id(params[:id])
-      if @user && @user == current_user
-        erb :'/users/users'
-      else
-        redirect '/signup'
-      end
-    end
-
-    get '/users/:id/edit' do
-      @user = User.find_by_id(params[:id])
-      if is_logged_in?(session) && @user == current_user
-        erb :'/users/edit'
-      elsif is_logged_in?(session) && @user != current_user
-        flash[:error] = "This is not your profile to edit"
-        redirect '/posts'
-      else
-        flash[:error] = "Please log in"
-        redirect '/login'
-      end
-    end  
+    end 
   end
