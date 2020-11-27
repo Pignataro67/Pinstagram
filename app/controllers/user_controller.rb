@@ -44,6 +44,13 @@ class UserController < ApplicationController
       flash[:success] = "See you next time!"
       redirect '/login'
     end 
-
-    
+  
+    get '/users/:id' do
+      @user = User.find_by_id(params[:id])
+      if @user && @user == current_user
+        erb :'/users/users'
+      else
+        redirect '/signup'
+      end
+    end
   end
