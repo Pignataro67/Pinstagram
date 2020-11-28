@@ -65,5 +65,18 @@ class UserController < ApplicationController
         flash[:error] = "Please log in"
         redirect '/login'
       end
-    end 
+    end
+    
+    post '/users/:id/edit' do
+      @user = User.find_by_id(params[:id])
+      if is_logged_in?(session) && @user.id == current_user.id
+        erb :'/users/edit'
+      elsif is_logged_in?(session) && @user.id != current_user.id
+      flash[:error] = "This is not your profile to edit"
+      redirect '/posts'
+      else
+        flash[:error] = "Please log in"
+        redirect '/login'
+      end
+    end
   end
