@@ -5,7 +5,10 @@
     <title></title>
   </head>
   <body>
-    <h1><% if @user && @user == current_user %>Your <% else %><%= @user.username %>'s <% end %> Profile</h1>
+  <h1><%= @user.username %>'s Profile</h1>
+    <%if @user.user_photo%>
+    <%=@user.user_photo%>
+    <%end%>
     <% posts = @user.posts.sort_by {|post| post.id }.reverse %>
     <% posts.each do |post| %>
     <a href="/users/<%= post.user.slug %>"><%= post.user.username %></a>
@@ -14,5 +17,10 @@
     <a href="/posts/<%= post.id %>"><%= post.post_photo %></a>
     <p><%= post.caption %></p>
     <% end %>
+
+    <form action="/users/<%= @user.id%>/edit" method="post">
+      <input type="hidden" name="_method" value="get">
+      <input type="submit" name="" value="Edit Profile Photo">
+    </form>
   </body>
 </html>
