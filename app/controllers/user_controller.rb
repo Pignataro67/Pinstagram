@@ -79,4 +79,16 @@ class UserController < ApplicationController
         redirect '/login'
       end
     end
+
+    patch '/users/:id' do
+      @user = User.find_by_id(params[:id])
+      if params[:user_photo] != ""
+        @user.update(user_photo: params[:user_photo])
+        flash[:success] = "Profile photo successfully updated!"
+        redirect "/users/#{@user.id}"
+      else
+        flash[:error] = "Your profile did not update correctly"
+        redirect "/users/#{@user.id}/edit"
+      end
+    end
   end
