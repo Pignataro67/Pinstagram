@@ -1,12 +1,14 @@
-<h1>Create a new post</h1>
-<form action="/posts" method="post" enctype="multipart/form-data">
-  <label>Photo of Post :</label>
-  <input type="file" name="file" value="">
+<h1>Hello, <%= current_user.username %></h1>
+<a href="/posts/new">Create New Post</a>
+<br><br>
+
+<h2>Recent Posts</h2>
+<% @posts.each do |post| %>
+  <a href="/users/<%= post.user.id %>"><%= post.user.username%></a>
   <br><br>
 
-  <label>Caption: </label>
-  <input type="text" name="caption" value="">
+  <img src="/images/post/<%= post.post_photo %>" alt="">
+  <br>
+  <a href="/posts/<%= post.id%>"><%= post.caption %></a>
   <br><br>
-
-  <input type="submit" name="" value="Create Post">
-</form>
+<% end %>
