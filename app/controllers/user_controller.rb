@@ -84,7 +84,7 @@ class UserController < ApplicationController
       @user = User.find_by_id(params[:id])
       if params[:user_photo] != ""
         @user.update(user_photo: params[:user_photo])
-        flash[:success] = "Profile photo successfully updated!"
+        flash[:success] = "Profile successfully updated!"
         redirect "/users/#{@user.id}"
       else
         flash[:error] = "Your profile did not update correctly"
