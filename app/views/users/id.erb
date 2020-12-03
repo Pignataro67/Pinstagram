@@ -4,3 +4,16 @@
   <img src="/images/profile/<%= @user.user_photo %>" style="width:15%" alt="">
 <%end%>
 <br><br>
+
+<h2><%= @user.username %>'s posts</h2>
+<% posts = @user.posts.sort_by {|post| post.id }.reverse %>
+<div class="container-fluid bg-3 text-center">
+  <% posts.each do |post| %>
+  <div class="row">
+    <div class="col-sm-3">
+      <img src="/images/post/<%= post.post_photo%>" style="width:33%"><br>
+      <a href="/posts/<%= post.id %>"><%= post.caption %></a><br><br>
+    </div>
+  </div>
+  <% end %>
+</div><br>
