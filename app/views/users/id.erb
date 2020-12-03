@@ -17,3 +17,8 @@
   </div>
   <% end %>
 </div><br>
+
+<form action="/users/<%= @user.id%>/edit" method="post">
+  <input type="hidden" name="_method" value="get">
+  <input type="submit" name="" value="Edit Profile Photo">
+</form>
