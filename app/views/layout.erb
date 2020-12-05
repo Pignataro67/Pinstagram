@@ -50,11 +50,20 @@
         </div>
       </div>
     </nav>
+    <div class="jumbotron">
+      <div class="container text-center">
+        <h1>Finstagram</h1>
+        <p>For the Learners</p>
+      </div>
+    </div>
   <% if flash.has?(:error) %>
     <p><%= flash[:error] %></p>
       <% elsif flash.has?(:success) %>
     <p><%= flash[:success] %></p>
   <% end %>
     <%= yield %>
+    <footer class="container-fluid text-center">
+      <p>created with <3</p>
+    </footer>
   </body>
 </html>
