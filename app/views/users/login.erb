@@ -1,22 +1,15 @@
-<% if flash.has?(:error) %>
-<p><%= flash[:error] %></p>
-<% elsif flash.has?(:success) %>
-<p><%= flash[:success] %></p>
-<% end %>
 <h1>Login in to view Finstagram</h1>
-  <form action="/login" method="post">
-    <label>Username: </label>
-    <input type="text" name="username" value="">
-    <br><br>
+<form action="/login" method="post">
+  <label>Username: </label>
+  <input type="text" name="username" value="">
+  <br><br>
 
-    <label>Password: </label>
-    <input type="password" name="password" value="">
-    <br><br>
+  <label>Password: </label>
+  <input type="password" name="password" value="">
+  <br><br>
 
-    <input type="submit" value="Log In">
-    <br><br>
+  <input type="submit" value="Log In">
+  <br><br>
 
-      <a href="/signup">No account? Sign up here!</a>
-    </form>
-  </body>
-</html>
+  <a href="/signup">No account? Sign up here!</a>
+</fom>

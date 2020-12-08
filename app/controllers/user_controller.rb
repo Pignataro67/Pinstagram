@@ -59,10 +59,10 @@ class UserController < ApplicationController
       if is_logged_in?(session) && @user == current_user
         erb :'/users/edit'
       elsif is_logged_in?(session) && @user != current_user
-        flash[:error] = "This is not your profile to edit"
+        flash[:error] = "This is not your account to edit"
         redirect '/posts'
       else
-        flash[:error] = "Please log in"
+        flash[:error] = "This is not your account to edit"
         redirect '/login'
       end
     end
